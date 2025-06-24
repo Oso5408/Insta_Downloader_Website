@@ -101,6 +101,9 @@ async function getInstagramMedia(url: string, type: string): Promise<InstagramMe
     const username = extractUsernameFromStoryUrl(url)
     if (!username) throw new Error('Could not extract username from story URL')
 
+    // Throttle: wait 2 seconds before making RapidAPI call to avoid rate limit
+    await sleep(2000)
+
     console.log(`Getting user ID for username: ${username}`)
 
     // 2. Get user ID by username
@@ -137,6 +140,8 @@ async function getInstagramMedia(url: string, type: string): Promise<InstagramMe
     console.log(`Found user ID: ${userId}`)
 
     // 3. Get stories by user ID
+    // Throttle: wait 2 seconds before making RapidAPI call to avoid rate limit
+    await sleep(2000)
     const storiesResp = await axios.get(
       'https://instagram-scrapper-posts-reels-stories-downloader.p.rapidapi.com/stories_by_user_id',
       {
@@ -598,11 +603,15 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error: any) {
+    let errorMsg = error.message || 'Failed to download media'
+    if (error.response && error.response.status === 429) {
+      errorMsg = 'You are making requests too quickly. Please wait a few seconds and try again.'
+    }
     console.error('Download API error:', error)
     return NextResponse.json({ 
       success: false,
-      error: error.message || 'Failed to download media' 
-    }, { status: 500 })
+      error: errorMsg
+    }, { status: error.response?.status || 500 })
   }
 }
 
