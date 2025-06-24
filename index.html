@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Downloader - Download Posts, Stories, Reels & More</title>
+    <meta name="description" content="Download Instagram posts, stories, reels, highlights, and profile pictures in HD quality. Free, fast, and anonymous Instagram content downloader.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #374151;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid #d1d5db;
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            background: #f9fafb;
+            transform: translateY(-2px);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f3f4f6;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -16px;
+            right: -16px;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white text-lg">📷</span>
+                    </div>
+                    <span class="text-xl font-bold gradient-text">InstaDownloader</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-purple-600 transition-colors">Features</a>
+                    <a href="#how-to" class="text-gray-600 hover:text-purple-600 transition-colors">How to Use</a>
+                    <a href="#faq" class="text-gray-600 hover:text-purple-600 transition-colors">FAQ</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center">
+                <div class="fade-in">
+                    <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                        Download Instagram
+                        <span class="gradient-text">Content</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                        Download Instagram posts, stories, reels, highlights, and profile pictures in HD quality. 
+                        Free, fast, and completely anonymous.
+                    </p>
+                </div>
+
+                <!-- Download Form -->
+                <div class="slide-up mb-12">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="card">
+                            <form id="downloadForm" class="space-y-6">
+                                <!-- URL Input -->
+                                <div>
+                                    <label for="url" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Instagram URL
+                                    </label>
+                                    <div class="flex space-x-2">
+                                        <div class="flex-1 relative">
+                                            <input
+                                                type="url"
+                                                id="url"
+                                                placeholder="https://www.instagram.com/p/..."
+                                                class="input-field pr-12"
+                                                required
+                                            />
+                                            <button
+                                                type="button"
+                                                onclick="pasteFromClipboard()"
+                                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                            >
+                                                📋
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Download Type Selection -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-3">
+                                        Content Type
+                                    </label>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                        <button type="button" onclick="selectType('post')" class="download-type-btn active p-4 rounded-lg border-2 border-purple-500 bg-purple-50" data-type="post">
+                                            <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                                📷
+                                            </div>
+                                            <div class="text-center">
+                                                <div class="font-semibold text-gray-900">Post</div>
+                                                <div class="text-xs text-gray-500 mt-1">Single posts or carousels</div>
+                                            </div>
+                                        </button>
+                                        <button type="button" onclick="selectType('story')" class="download-type-btn p-4 rounded-lg border-2 border-gray-200 hover:border-gray-300" data-type="story">
+                                            <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                                📹
+                                            </div>
+                                            <div class="text-center">
+                                                <div class="font-semibold text-gray-900">Story</div>
+                                                <div class="text-xs text-gray-500 mt-1">Stories from public accounts</div>
+                                            </div>
+                                        </button>
+                                        <button type="button" onclick="selectType('reel')" class="download-type-btn p-4 rounded-lg border-2 border-gray-200 hover:border-gray-300" data-type="reel">
+                                            <div class="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                                ▶️
+                                            </div>
+                                            <div class="text-center">
+                                                <div class="font-semibold text-gray-900">Reel</div>
+                                                <div class="text-xs text-gray-500 mt-1">Reels in HD quality</div>
+                                            </div>
+                                        </button>
+                                        <button type="button" onclick="selectType('profile')" class="download-type-btn p-4 rounded-lg border-2 border-gray-200 hover:border-gray-300" data-type="profile">
+                                            <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                                👤
+                                            </div>
+                                            <div class="text-center">
+                                                <div class="font-semibold text-gray-900">Profile</div>
+                                                <div class="text-xs text-gray-500 mt-1">Profile pictures and highlights</div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Download Button -->
+                                <button
+                                    type="submit"
+                                    id="downloadBtn"
+                                    class="btn-primary w-full flex items-center justify-center space-x-2"
+                                >
+                                    <span>📥</span>
+                                    <span id="downloadText">Download Post</span>
+                                </button>
+                            </form>
+
+                            <!-- Info -->
+                            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center mt-0.5">
+                                        <span class="text-white text-xs">ℹ</span>
+                                    </div>
+                                    <div class="text-sm text-blue-800">
+                                        <p class="font-medium mb-1">How to get Instagram URL:</p>
+                                        <ol class="list-decimal list-inside space-y-1 text-xs">
+                                            <li>Open Instagram and find the content you want to download</li>
+                                            <li>Tap the three dots (...) in the top right corner</li>
+                                            <li>Select "Copy link" or "Share" → "Copy link"</li>
+                                            <li>Paste the URL above and click Download</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                        <div class="text-center">
+                            <div class="feature-icon bg-gradient-to-r from-purple-500 to-pink-500">
+                                ⚡
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Fast & Free</h3>
+                            <p class="text-gray-600">Download content instantly without any cost</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="feature-icon bg-gradient-to-r from-purple-500 to-pink-500">
+                                🛡️
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">100% Anonymous</h3>
+                            <p class="text-gray-600">No login required, complete privacy protection</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="feature-icon bg-gradient-to-r from-purple-500 to-pink-500">
+                                ⭐
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">HD Quality</h3>
+                            <p class="text-gray-600">Download in original high-definition quality</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background decoration -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-10 blur-3xl"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-10 blur-3xl"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Why Choose Our
+                    <span class="gradient-text">Instagram Downloader</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    We provide the most reliable and user-friendly Instagram downloader with advanced features
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                <div class="card text-center">
+                    <div class="feature-icon bg-gradient-to-r from-blue-500 to-cyan-500">
+                        📥
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Multiple Content Types</h3>
+                    <p class="text-gray-600">Download posts, stories, reels, highlights, and profile pictures in one place</p>
+                </div>
+                <div class="card text-center">
+                    <div class="feature-icon bg-gradient-to-r from-green-500 to-emerald-500">
+                        🛡️
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">100% Anonymous</h3>
+                    <p class="text-gray-600">No login required, no personal data collected, complete privacy protection</p>
+                </div>
+                <div class="card text-center">
+                    <div class="feature-icon bg-gradient-to-r from-yellow-500 to-orange-500">
+                        ⚡
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Lightning Fast</h3>
+                    <p class="text-gray-600">Download content instantly with our optimized servers and CDN</p>
+                </div>
+                <div class="card text-center">
+                    <div class="feature-icon bg-gradient-to-r from-purple-500 to-pink-500">
+                        🌐
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Works Everywhere</h3>
+                    <p class="text-gray-600">Access from any device - mobile, tablet, or desktop browser</p>
+                </div>
+                <div class="card text-center">
+                    <div class="feature-icon bg-gradient-to-r from-red-500 to-pink-500">
+                        ⭐
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">HD Quality</h3>
+                    <p class="text-gray-600">Download content in original high-definition quality without watermarks</p>
+                </div>
+                <div class="card text-center">
+                    <div class="feature-icon bg-gradient-to-r from-indigo-500 to-purple-500">
+                        📱
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Mobile Friendly</h3>
+                    <p class="text-gray-600">Optimized for mobile devices with touch-friendly interface</p>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-8 text-white text-center">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <div class="text-4xl font-bold mb-2">1M+</div>
+                        <div class="text-purple-100">Downloads Completed</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold mb-2">99.9%</div>
+                        <div class="text-purple-100">Uptime Guarantee</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold mb-2">24/7</div>
+                        <div class="text-purple-100">Customer Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section id="how-to" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    How to Use Our
+                    <span class="gradient-text">Instagram Downloader</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Follow these simple steps to download any Instagram content in just a few clicks
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="relative">
+                    <div class="card text-center h-full">
+                        <div class="step-number">01</div>
+                        <div class="feature-icon bg-gradient-to-r from-blue-500 to-cyan-500">
+                            📋
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Copy Instagram URL</h3>
+                        <p class="text-gray-600 text-sm">Open Instagram and find the content you want to download. Tap the three dots (...) and select "Copy link".</p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="card text-center h-full">
+                        <div class="step-number">02</div>
+                        <div class="feature-icon bg-gradient-to-r from-purple-500 to-pink-500">
+                            🔗
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Paste URL</h3>
+                        <p class="text-gray-600 text-sm">Paste the copied Instagram URL into the input field above. You can also use the paste button for convenience.</p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="card text-center h-full">
+                        <div class="step-number">03</div>
+                        <div class="feature-icon bg-gradient-to-r from-green-500 to-emerald-500">
+                            ✅
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Select Content Type</h3>
+                        <p class="text-gray-600 text-sm">Choose the type of content you want to download: Post, Story, Reel, or Profile picture.</p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="card text-center h-full">
+                        <div class="step-number">04</div>
+                        <div class="feature-icon bg-gradient-to-r from-orange-500 to-red-500">
+                            📥
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Download</h3>
+                        <p class="text-gray-600 text-sm">Click the download button and wait for the process to complete. Your file will be saved automatically.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                        Important Tips
+                    </h3>
+                    <p class="text-gray-600">
+                        Keep these things in mind for the best experience
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50">
+                        <div class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                        <span class="text-gray-700 text-sm">Only public Instagram content can be downloaded</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50">
+                        <div class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                        <span class="text-gray-700 text-sm">No login or account required</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50">
+                        <div class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                        <span class="text-gray-700 text-sm">Downloads are completely anonymous</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50">
+                        <div class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                        <span class="text-gray-700 text-sm">All content is downloaded in original quality</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50">
+                        <div class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                        <span class="text-gray-700 text-sm">Works on mobile, tablet, and desktop</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50">
+                        <div class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                        <span class="text-gray-700 text-sm">Free to use with no hidden costs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white text-lg">📷</span>
+                        </div>
+                        <span class="text-xl font-bold">InstaDownloader</span>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Download Instagram posts, stories, reels, and profile pictures in HD quality. 
+                        Free, fast, and completely anonymous.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">🐦</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📘</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📷</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📧</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Product</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Instagram Downloader</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Story Downloader</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Reel Downloader</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Profile Downloader</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Contact Us</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors text-sm">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">DMCA</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center space-x-2 text-gray-400 text-sm mb-4 md:mb-0">
+                        <span>🛡️</span>
+                        <span>100% Safe & Anonymous Downloads</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-gray-400 text-sm">
+                        <span>Made with</span>
+                        <span class="text-red-500">❤️</span>
+                        <span>for Instagram users</span>
+                    </div>
+                </div>
+                <div class="text-center mt-4 text-gray-500 text-xs">
+                    <p>
+                        © 2024 InstaDownloader. Not affiliated with Instagram™. All rights belong to their respective owners.
+                    </p>
+                    <p class="mt-1">
+                        We respect privacy — only public content is available for download.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+        <div class="flex items-center space-x-2">
+            <span id="toastIcon">✅</span>
+            <span id="toastMessage">Success!</span>
+        </div>
+    </div>
+
+    <script>
+        let selectedType = 'post';
+        let isLoading = false;
+
+        // Select download type
+        function selectType(type) {
+            selectedType = type;
+            
+            // Update button styles
+            document.querySelectorAll('.download-type-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-purple-500', 'bg-purple-50');
+                btn.classList.add('border-gray-200');
+            });
+            
+            event.target.closest('.download-type-btn').classList.add('active', 'border-purple-500', 'bg-purple-50');
+            event.target.closest('.download-type-btn').classList.remove('border-gray-200');
+            
+            // Update download button text
+            const typeNames = {
+                'post': 'Post',
+                'story': 'Story',
+                'reel': 'Reel',
+                'profile': 'Profile'
+            };
+            document.getElementById('downloadText').textContent = `Download ${typeNames[type]}`;
+        }
+
+        // Paste from clipboard
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('url').value = text;
+                showToast('URL pasted from clipboard', 'success');
+            } catch (error) {
+                showToast('Could not access clipboard', 'error');
+            }
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            
+            toastMessage.textContent = message;
+            toastIcon.textContent = type === 'success' ? '✅' : '❌';
+            
+            toast.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        // Handle form submission
+        document.getElementById('downloadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const url = document.getElementById('url').value.trim();
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            if (!url) {
+                showToast('Please enter a valid Instagram URL', 'error');
+                return;
+            }
+
+            if (!url.includes('instagram.com')) {
+                showToast('Please enter a valid Instagram URL', 'error');
+                return;
+            }
+
+            if (isLoading) return;
+
+            // Start loading
+            isLoading = true;
+            downloadBtn.disabled = true;
+            downloadBtn.innerHTML = '<span class="loading"></span><span>Downloading...</span>';
+
+            // Simulate API call
+            setTimeout(() => {
+                isLoading = false;
+                downloadBtn.disabled = false;
+                downloadBtn.innerHTML = '<span>📥</span><span id="downloadText">Download Post</span>';
+                
+                const typeNames = {
+                    'post': 'Post',
+                    'story': 'Story',
+                    'reel': 'Reel',
+                    'profile': 'Profile'
+                };
+                document.getElementById('downloadText').textContent = `Download ${typeNames[selectedType]}`;
+                
+                showToast(`${typeNames[selectedType]} downloaded successfully!`, 'success');
+            }, 2000);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
