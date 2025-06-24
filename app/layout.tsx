@@ -36,6 +36,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* SEO Meta Tags */}
+        <title>Instagram Downloader | Download IG Posts, Stories, Reels in HD</title>
+        <meta name="description" content="Download Instagram posts, stories, reels, and profile pictures in HD quality. Free, fast, and anonymous Instagram downloader." />
+        <meta name="keywords" content="instagram downloader, download instagram, ig stories, reels, profile pictures, save instagram, igdownloader" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Open Graph Tags */}
+        <meta property="og:title" content="Instagram Downloader" />
+        <meta property="og:description" content="Download Instagram posts, stories, reels, and profile pictures in HD quality." />
+        <meta property="og:url" content="https://www.igdownloader24.com" />
+        <meta property="og:type" content="website" />
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Instagram Downloader" />
+        <meta name="twitter:description" content="Download Instagram posts, stories, reels, and profile pictures in HD quality." />
         {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=G-WK4TPDYS40`}
