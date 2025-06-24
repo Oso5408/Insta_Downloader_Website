@@ -49,6 +49,14 @@ export default function RootLayout({
             gtag('config', 'G-WK4TPDYS40');
           `}
         </Script>
+        {/* Google AdSense */}
+        <Script
+          id="adsense-script"
+          data-ad-client="ca-pub-7753715221598603"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          strategy="afterInteractive"
+        />
       </head>
       <body className={inter.className}>
         {children}
