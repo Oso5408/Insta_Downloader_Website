@@ -50,12 +50,13 @@ export default function RootLayout({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Instagram Downloader" />
         <meta name="twitter:description" content="Download Instagram posts, stories, reels, and profile pictures in HD quality." />
-        {/* Google Analytics */}
+        {/* Google tag (gtag.js) */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=G-WK4TPDYS40`}
+          src="https://www.googletagmanager.com/gtag/js?id=G-WK4TPDYS40"
+          async
           strategy="afterInteractive"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="gtag-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
