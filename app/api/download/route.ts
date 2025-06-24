@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import axios from 'axios'
 import AdmZip from 'adm-zip'
+import { Redis } from '@upstash/redis'
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
 
 interface DownloadRequest {
   url: string
@@ -14,6 +20,7 @@ interface InstagramMedia {
   filename: string
   width?: number
   height?: number
+  coverUrl?: string
 }
 
 interface RapidAPIResponse {
@@ -97,9 +104,26 @@ async function getInstagramMedia(url: string, type: string): Promise<InstagramMe
   const timestamp = Date.now();
 
   if (type === 'story') {
-    // 1. Extract username
-    const username = extractUsernameFromStoryUrl(url)
-    if (!username) throw new Error('Could not extract username from story URL')
+    // 1. Extract username (support both /stories/username/ and /username/ profile URLs)
+    let username = extractUsernameFromStoryUrl(url)
+    if (!username) {
+      // Try to extract from profile URL
+      username = extractUsernameFromProfileUrl(url)
+      if (username) {
+        // Auto-correct: convert profile URL to story URL
+        url = `https://www.instagram.com/stories/${username}/`
+      }
+    }
+    if (!username) throw new Error('Could not extract username from story or profile URL')
+
+    // GLOBAL LOCK: Wait for any ongoing RapidAPI story request to finish
+    while (await redis.get('rapidapi:story:lock')) {
+      console.log('Waiting for global story lock...');
+      await sleep(500); // Wait 0.5s and check again
+    }
+    // Set lock for 3 seconds (adjust as needed)
+    await redis.set('rapidapi:story:lock', '1', { ex: 3 });
+    console.log('Acquired global story lock. Proceeding with RapidAPI call.');
 
     // Throttle: wait 2 seconds before making RapidAPI call to avoid rate limit
     await sleep(2000)
@@ -184,6 +208,11 @@ async function getInstagramMedia(url: string, type: string): Promise<InstagramMe
       // Video story
       if (story.video_versions && Array.isArray(story.video_versions)) {
         const bestVideo = story.video_versions[0]
+        // Try to get a cover image for the video
+        let coverUrl = undefined
+        if (story.image_versions2 && story.image_versions2.candidates && story.image_versions2.candidates[0]) {
+          coverUrl = story.image_versions2.candidates[0].url
+        }
         if (bestVideo && bestVideo.url) {
           media.push({
             url: bestVideo.url,
@@ -191,7 +220,8 @@ async function getInstagramMedia(url: string, type: string): Promise<InstagramMe
             quality: 'hd',
             filename: `instagram-story-${userId}-${timestamp}-${idx++}.mp4`,
             width: bestVideo.width,
-            height: bestVideo.height
+            height: bestVideo.height,
+            coverUrl // Add cover image for video
           })
         }
       }
@@ -224,24 +254,12 @@ async function getInstagramMedia(url: string, type: string): Promise<InstagramMe
     const reelData = reelResp.data
     
     // Handle video reels
-    if (reelData.video_versions && Array.isArray(reelData.video_versions)) {
-      const bestVideo = reelData.video_versions[0]
-      if (bestVideo && bestVideo.url) {
-        media.push({
-          url: bestVideo.url,
-          type: 'video',
-          quality: 'hd',
-          filename: `instagram-reel-${shortcode}-${timestamp}.mp4`,
-          width: bestVideo.width,
-          height: bestVideo.height
-        })
-      }
-    }
-    
-    // Handle image reels (if any)
+    let reelCoverUrl: string | undefined = undefined;
     if (reelData.image_versions2 && reelData.image_versions2.candidates) {
-      const bestImage = reelData.image_versions2.candidates[0]
+      const bestImage = reelData.image_versions2.candidates[0];
       if (bestImage && bestImage.url) {
+        reelCoverUrl = bestImage.url;
+        // Also push the image as a separate media item if desired (optional)
         media.push({
           url: bestImage.url,
           type: 'image',
@@ -249,7 +267,21 @@ async function getInstagramMedia(url: string, type: string): Promise<InstagramMe
           filename: `instagram-reel-${shortcode}-${timestamp}.jpg`,
           width: bestImage.width,
           height: bestImage.height
-        })
+        });
+      }
+    }
+    if (reelData.video_versions && Array.isArray(reelData.video_versions)) {
+      const bestVideo = reelData.video_versions[0];
+      if (bestVideo && bestVideo.url) {
+        media.push({
+          url: bestVideo.url,
+          type: 'video',
+          quality: 'hd',
+          filename: `instagram-reel-${shortcode}-${timestamp}.mp4`,
+          width: bestVideo.width,
+          height: bestVideo.height,
+          coverUrl: reelCoverUrl // Attach cover image if available
+        });
       }
     }
     

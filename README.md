@@ -49,7 +49,7 @@ npm run dev
 yarn dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [http://localhost:3000](http://localhost u:3000) in your browser.
 
 ## Project Structure
 

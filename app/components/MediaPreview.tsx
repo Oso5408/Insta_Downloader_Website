@@ -12,6 +12,7 @@ interface MediaItem {
   filename: string
   width?: number
   height?: number
+  coverUrl?: string
 }
 
 interface MediaPreviewProps {
@@ -206,6 +207,7 @@ export default function MediaPreview({ media, onClose, onDownload, isLoading }: 
                 {/* Media Preview */}
                 <div
                   className="aspect-square bg-gray-100 relative overflow-hidden"
+                  onClick={() => setPreviewItem(item)}
                 >
                   {item.type === 'image' ? (
                     <img
@@ -216,6 +218,20 @@ export default function MediaPreview({ media, onClose, onDownload, isLoading }: 
                         e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik03NSA5MEwxMDAgNjVMNzUgNDBWNzBIMTI1VjkwSDc1WiIgZmlsbD0iIzlDQTNBRiIvPgo8L3N2Zz4K'
                       }}
                     />
+                  ) : item.coverUrl ? (
+                    <div className="w-full h-full relative">
+                      <img
+                        src={`/api/proxy?url=${encodeURIComponent(item.coverUrl)}`}
+                        alt={`Cover for media ${index + 1}`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                        onError={(e) => {
+                          e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik03NSA5MEwxMDAgNjVMNzUgNDBWNzBIMTI1VjkwSDc1WiIgZmlsbD0iIzlDQTNBRiIvPgo8L3N2Zz4K'
+                        }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Play size={48} className="text-white drop-shadow-lg opacity-90" />
+                      </div>
+                    </div>
                   ) : (
                     <div className="w-full h-full bg-gray-900 flex items-center justify-center">
                       <div className="text-center">
