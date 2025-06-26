@@ -1,6 +1,7 @@
 'use client'
 
 import { Instagram, Twitter, Facebook, Mail, Shield, Heart } from 'lucide-react'
+import Link from 'next/link'
 
 const footerLinks = {
   product: [
@@ -10,10 +11,10 @@ const footerLinks = {
     { name: 'Profile Downloader', href: '#' },
   ],
   support: [
-    { name: 'Help Center', href: '#' },
-    { name: 'Contact Us', href: '#' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Privacy Policy', href: '#' },
+    { name: 'Help Center', href: '/help-center' },
+    { name: 'Contact Us', href: '/contact-us' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Privacy Policy', href: '/privacy-policy' },
   ],
   legal: [
     { name: 'Terms of Service', href: '/terms' },
@@ -79,12 +80,21 @@ export default function Footer() {
             <ul className="space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
+                  {link.href.startsWith('/') ? (
+                    <Link 
+                      href={link.href} 
+                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a 
+                      href={link.href} 
+                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -96,12 +106,21 @@ export default function Footer() {
             <ul className="space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
+                  {link.href.startsWith('/') ? (
+                    <Link 
+                      href={link.href} 
+                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a 
+                      href={link.href} 
+                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
