@@ -28,7 +28,7 @@ import { useAppTranslation } from '../components/useAppTranslation';
 export default function Home({ params }: { params: { lang: string } }) {
   const [isLoading, setIsLoading] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const { t, locale } = useAppTranslation();
+  const { t, lang } = useAppTranslation();
 
   const handleDownload = async (url: string, type: string) => {
     setIsLoading(true);
