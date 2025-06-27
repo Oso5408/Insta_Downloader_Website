@@ -39,5 +39,15 @@
   "tip_no_login": "No login or account required",
   "tip_works_everywhere": "Works on mobile, tablet, and desktop",
   "tip_anonymous": "Downloads are completely anonymous",
-  "tip_free": "Free to use with no hidden costs"
+  "tip_free": "Free to use with no hidden costs",
+  "need_help_title": "Need help? Our support team is here for you.",
+  "need_help_desc": "If you have any questions or need assistance, please reach out to us directly.",
+  "contact_us": "Contact Us",
+  "instagram_url": "Instagram URL",
+  "content_type": "Content Type",
+  "post_desc": "Download single posts or carousels",
+  "story_desc": "Download stories from public accounts",
+  "reel_desc": "Download reels in HD quality",
+  "profile_highlights_desc": "Download highlights from public profiles",
+  "preview_download": "Preview & Download"
 } 

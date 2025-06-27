@@ -133,16 +133,16 @@ export default function HowToUse() {
           className="mt-16 text-center"
         >
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            Need help? Our support team is here for you.
+            {t('need_help_title')}
           </h3>
           <p className="text-gray-600 mb-6">
-            If you have any questions or need assistance, please reach out to us directly.
+            {t('need_help_desc')}
           </p>
           <a
             href="/contact-us"
             className="btn-secondary inline-flex items-center space-x-2"
           >
-            <span>Contact Us</span>
+            <span>{t('contact_us')}</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

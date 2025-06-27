@@ -76,6 +76,9 @@ export default function Home({ params }: { params: { lang: string } }) {
                     <li>
                       <a href="/hi" className="block px-4 py-2 hover:bg-gray-100">हिन्दी</a>
                     </li>
+                    <li>
+                      <a href="/ne" className="block px-4 py-2 hover:bg-gray-100">नेपाली</a>
+                    </li>
                   </ul>
                 </div>
               )}

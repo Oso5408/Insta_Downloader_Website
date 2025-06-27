@@ -6,6 +6,7 @@ import { Download, Link, Image, Video, User, Camera, Play } from 'lucide-react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import MediaPreview from './MediaPreview'
+import { useAppTranslation } from './useAppTranslation'
 
 interface DownloadFormProps {
   onDownload: (url: string, type: string) => void
@@ -36,42 +37,8 @@ interface DownloadResponse {
   error?: string
 }
 
-const downloadTypes = [
-  {
-    id: 'post',
-    name: 'Post',
-    icon: Image,
-    description: 'Download single posts or carousels',
-    color: 'from-blue-500 to-cyan-500',
-    disabled: false
-  },
-  {
-    id: 'story',
-    name: 'Story',
-    icon: Camera,
-    description: 'Download stories from public accounts',
-    color: 'from-purple-500 to-pink-500',
-    disabled: false
-  },
-  {
-    id: 'reel',
-    name: 'Reel',
-    icon: Play,
-    description: 'Download reels in HD quality',
-    color: 'from-orange-500 to-red-500',
-    disabled: false
-  },
-  {
-    id: 'profile',
-    name: 'Profile',
-    icon: User,
-    description: 'Download profile pictures and highlights',
-    color: 'from-green-500 to-emerald-500',
-    disabled: true
-  }
-]
-
 export default function DownloadForm({ onDownload, isLoading }: DownloadFormProps) {
+  const { t } = useAppTranslation();
   const [url, setUrl] = useState('')
   const [selectedType, setSelectedType] = useState('post')
   const [isProcessing, setIsProcessing] = useState(false)
@@ -198,6 +165,41 @@ export default function DownloadForm({ onDownload, isLoading }: DownloadFormProp
     }
   }
 
+  const downloadTypes = [
+    {
+      id: 'post',
+      name: t('post'),
+      icon: Image,
+      description: t('post_desc'),
+      color: 'from-blue-500 to-cyan-500',
+      disabled: false
+    },
+    {
+      id: 'story',
+      name: t('story'),
+      icon: Camera,
+      description: t('story_desc'),
+      color: 'from-purple-500 to-pink-500',
+      disabled: false
+    },
+    {
+      id: 'reel',
+      name: t('reel'),
+      icon: Play,
+      description: t('reel_desc'),
+      color: 'from-orange-500 to-red-500',
+      disabled: false
+    },
+    {
+      id: 'profile',
+      name: t('profile_highlights'),
+      icon: User,
+      description: t('profile_highlights_desc'),
+      color: 'from-green-500 to-emerald-500',
+      disabled: true
+    }
+  ]
+
   return (
     <>
       <div className="max-w-4xl mx-auto">
@@ -211,7 +213,7 @@ export default function DownloadForm({ onDownload, isLoading }: DownloadFormProp
             {/* URL Input */}
             <div>
               <label htmlFor="url" className="block text-sm font-medium text-gray-700 mb-2">
-                Instagram URL
+                {t('instagram_url')}
               </label>
               <div className="flex space-x-2">
                 <div className="flex-1 relative">
@@ -243,59 +245,40 @@ export default function DownloadForm({ onDownload, isLoading }: DownloadFormProp
             </div>
 
             {/* Content Type Selector - Icon Grid */}
-            <div className="mt-6">
-              <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-2">
-                Content Type
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                {t('content_type')}
               </label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {downloadTypes.map((type) => {
-                  const Icon = type.icon
-                  return (
-                    <button
-                      key={type.id}
-                      type="button"
-                      onClick={() => !type.disabled && setSelectedType(type.id)}
-                      disabled={type.disabled}
-                      className={`relative p-4 rounded-xl border-2 transition-all duration-200 ${
-                        type.disabled
-                          ? 'border-gray-200 bg-gray-50 cursor-not-allowed opacity-60'
-                          : selectedType === type.id
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300 bg-white'
-                      }`}
-                    >
-                      <div className="flex flex-col items-center space-y-2">
-                        <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${type.color} flex items-center justify-center ${type.disabled ? 'opacity-50' : ''}`}>
-                          <Icon size={24} className="text-white" />
-                        </div>
-                        <div className="text-center">
-                          <h3 className="font-semibold text-gray-900">{type.name === 'Profile' ? 'Profile Highlights' : type.name}</h3>
-                          <p className="text-xs text-gray-500 mt-1">{type.name === 'Profile' ? 'Download highlights from public profiles' : type.description}</p>
-                        </div>
-                      </div>
-                    </button>
-                  )
-                })}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {downloadTypes.map((type) => (
+                  <button
+                    key={type.id}
+                    type="button"
+                    onClick={() => !type.disabled && setSelectedType(type.id)}
+                    className={`download-type-btn p-4 rounded-lg border-2 ${selectedType === type.id ? 'border-blue-500' : 'border-gray-200 hover:border-gray-300'} ${type.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    data-type={type.id}
+                    disabled={type.disabled}
+                  >
+                    <div className={`w-8 h-8 bg-gradient-to-r ${type.color} rounded-lg flex items-center justify-center mx-auto mb-2`}>
+                      <type.icon size={24} className="text-white" />
+                    </div>
+                    <div className="text-center">
+                      <div className="font-semibold text-gray-900">{type.name}</div>
+                      <div className="text-xs text-gray-500 mt-1">{type.description}</div>
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
 
             {/* Download Button */}
             <button
               type="submit"
-              disabled={isProcessing || !url.trim()}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
+              id="downloadBtn"
+              className="btn-primary w-full flex items-center justify-center space-x-2"
             >
-              {isProcessing ? (
-                <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                  <span>Processing...</span>
-                </>
-              ) : (
-                <>
-                  <Download size={20} />
-                  <span>Preview & Download</span>
-                </>
-              )}
+              <Download size={16} />
+              <span>{t('preview_download')}</span>
             </button>
           </form>
         </motion.div>

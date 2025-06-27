@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
 // Change this version string to force the notice to reappear for all users
-const NOTICE_VERSION = "2024-06-27-v1";
+const NOTICE_VERSION = "2024-06-27-v2";
 const LOCALSTORAGE_KEY = `update-notice-dismissed-${NOTICE_VERSION}`;
 
 export default function UpdateNotice() {
@@ -31,7 +31,8 @@ export default function UpdateNotice() {
       <div className="flex items-center space-x-3">
         <span className="font-semibold">🚀 Update:</span>
         <span>
-          We've just added <b>Help Center</b>, <b>Contact Us</b>, and <b>FAQ</b> pages for better support! Check them out in the footer.
+          We've added <b>Nepali (नेपाली)</b> language support! The main download form and all features are now available in Nepali, Hindi, Chinese, and English.<br className="hidden md:inline" />
+          <b>Translations improved</b> for the main download form and content type selector. <b>Download reliability</b> and error handling have also been enhanced.
         </span>
       </div>
       <button

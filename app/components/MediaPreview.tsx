@@ -68,7 +68,8 @@ export default function MediaPreview({ media, onClose, onDownload, isLoading }: 
         })
 
         if (!response.ok) {
-          throw new Error('Failed to create ZIP file')
+          const errorData = await response.json().catch(() => ({}))
+          throw new Error(errorData.error || 'Failed to create ZIP file')
         }
 
         const blob = await response.blob()
@@ -82,39 +83,72 @@ export default function MediaPreview({ media, onClose, onDownload, isLoading }: 
         window.URL.revokeObjectURL(url)
       } else {
         // Individual downloads for single items or non-highlights
+        let successCount = 0
+        let failedItems: string[] = []
+        
         for (const item of selectedMedia) {
-          const response = await fetch('/api/proxy', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              url: item.url,
-              filename: item.filename,
-            }),
-          })
+          try {
+            console.log(`Downloading: ${item.filename} from ${item.url}`)
+            
+            const response = await fetch('/api/proxy', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                url: item.url,
+                filename: item.filename,
+              }),
+            })
 
-          if (!response.ok) {
-            throw new Error(`Failed to download ${item.filename}`)
+            if (!response.ok) {
+              const errorData = await response.json().catch(() => ({}))
+              throw new Error(errorData.error || `HTTP ${response.status}`)
+            }
+
+            const blob = await response.blob()
+            
+            // Check if blob is valid
+            if (blob.size === 0) {
+              throw new Error('Downloaded file is empty')
+            }
+            
+            const url = window.URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = item.filename
+            document.body.appendChild(a)
+            a.click()
+            document.body.removeChild(a)
+            window.URL.revokeObjectURL(url)
+            
+            successCount++
+            
+            // Add a small delay between downloads to avoid overwhelming the server
+            if (selectedMedia.length > 1) {
+              await new Promise(resolve => setTimeout(resolve, 500))
+            }
+            
+          } catch (error) {
+            console.error(`Failed to download ${item.filename}:`, error)
+            failedItems.push(item.filename)
           }
-
-          const blob = await response.blob()
-          const url = window.URL.createObjectURL(blob)
-          const a = document.createElement('a')
-          a.href = url
-          a.download = item.filename
-          document.body.appendChild(a)
-          a.click()
-          document.body.removeChild(a)
-          window.URL.revokeObjectURL(url)
+        }
+        
+        // Show results
+        if (successCount > 0 && failedItems.length === 0) {
+          toast.success(`Successfully downloaded ${successCount} item(s)!`)
+        } else if (successCount > 0 && failedItems.length > 0) {
+          toast.success(`Downloaded ${successCount} item(s), but failed to download: ${failedItems.join(', ')}`)
+        } else {
+          throw new Error(`Failed to download all items: ${failedItems.join(', ')}`)
         }
       }
 
       setSelectedItems(new Set())
-      toast.success(`Downloaded ${selectedItems.size} item(s) successfully!`)
     } catch (error) {
       console.error('Download error:', error)
-      toast.error('Failed to download selected items')
+      toast.error(error instanceof Error ? error.message : 'Failed to download selected items')
     } finally {
       setIsDownloading(false)
     }
