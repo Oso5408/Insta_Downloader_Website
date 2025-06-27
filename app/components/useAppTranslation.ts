@@ -4,13 +4,17 @@ import en from "../../public/locales/en/common.json";
 import zh from "../../public/locales/zh/common.json";
 import hi from "../../public/locales/hi/common.json";
 
+const enDict = en as { [key: string]: string };
+const zhDict = zh as { [key: string]: string };
+const hiDict = hi as { [key: string]: string };
+
 export function useAppTranslation() {
   const pathname = usePathname();
   // Detect lang from the first path segment
   const lang = pathname?.split("/")[1];
-  let dict = en;
-  if (lang === "zh") dict = zh;
-  else if (lang === "hi") dict = hi;
+  let dict = enDict;
+  if (lang === "zh") dict = zhDict;
+  else if (lang === "hi") dict = hiDict;
   const t = (key: string) => dict[key] || key;
   return { t, lang };
 } 
