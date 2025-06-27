@@ -26,7 +26,7 @@ export default function TermsOfService() {
         <h2 className="text-xl font-semibold mt-6">5. Changes to Terms</h2>
         <p>We reserve the right to modify these terms at any time. Changes will be posted on this page.</p>
         <h2 className="text-xl font-semibold mt-6">6. Contact</h2>
-        <p>For questions about these Terms, please contact us at <a href="mailto:userbuy51@gmail.com" className="text-blue-600 underline">userbuy51@gmail.com</a> or via the form on our website.</p>
+        <p>For questions about these Terms, please contact us at <a href="mailto:support24@igdownloader24.com" className="text-blue-600 underline">support24@igdownloader24.com</a> or via the form on our website.</p>
       </div>
     </div>
   );

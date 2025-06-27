@@ -18,14 +18,14 @@ export default function DmcaPolicy() {
           <li>Your electronic or physical signature</li>
         </ul>
         <h2 className="text-xl font-semibold mt-6">2. DMCA Agent Contact</h2>
-        <p>Email: <a href="mailto:userbuy51@gmail.com" className="text-blue-600 underline">userbuy51@gmail.com</a></p>
+        <p>Email: <a href="mailto:support24@igdownloader24.com" className="text-blue-600 underline">support24@igdownloader24.com</a></p>
         <p>Or use the contact form on our website.</p>
         <h2 className="text-xl font-semibold mt-6">3. Counter-Notification</h2>
         <p>If you believe your content was removed in error, you may submit a counter-notification with similar information.</p>
         <h2 className="text-xl font-semibold mt-6">4. Repeat Infringers</h2>
         <p>We may terminate accounts or access for repeat infringers.</p>
         <h2 className="text-xl font-semibold mt-6">5. Contact</h2>
-        <p>For DMCA-related questions, please contact us at <a href="mailto:userbuy51@gmail.com" className="text-blue-600 underline">userbuy51@gmail.com</a> or via the form on our website.</p>
+        <p>For DMCA-related questions, please contact us at <a href="mailto:support24@igdownloader24.com" className="text-blue-600 underline">support24@igdownloader24.com</a> or via the form on our website.</p>
       </div>
     </div>
   );

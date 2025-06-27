@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
         <h2 className="text-xl font-semibold mt-6">4. Data Security</h2>
         <p>We take reasonable measures to protect your information.</p>
         <h2 className="text-xl font-semibold mt-6">5. Contact</h2>
-        <p>For questions about this Privacy Policy, please contact us at <a href="mailto:userbuy51@gmail.com" className="text-blue-600 underline">userbuy51@gmail.com</a> or via the form on our website.</p>
+        <p>For questions about this Privacy Policy, please contact us at <a href="mailto:support24@igdownloader24.com" className="text-blue-600 underline">support24@igdownloader24.com</a> or via the form on our website.</p>
         <p className="text-xs text-gray-400 mt-8">This is a sample privacy policy. Please review and customize for your needs.</p>
       </div>
     </div>

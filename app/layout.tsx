@@ -7,20 +7,20 @@ import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Instagram Downloader - Download Posts, Stories, Reels & More',
-  description: 'Download Instagram posts, stories, reels, highlights, and profile pictures in HD quality. Free, fast, and anonymous Instagram content downloader.',
-  keywords: 'instagram downloader, instagram story downloader, instagram post downloader, instagram reels downloader, instagram highlights downloader',
+  title: 'Instagram Video Downloader | Download Instagram Videos, Reels & More',
+  description: 'Free Instagram video downloader. Download Instagram videos, reels, and stories in HD quality. Fast, anonymous, and easy to use. Try our Instagram video download tool now!',
+  keywords: 'instagram video download, instagram video downloader, download instagram video, instagram download video, instagram reel download, free, HD, online',
   authors: [{ name: 'Instagram Downloader' }],
   openGraph: {
-    title: 'Instagram Downloader - Download Posts, Stories, Reels & More',
-    description: 'Download Instagram posts, stories, reels, highlights, and profile pictures in HD quality. Free, fast, and anonymous Instagram content downloader.',
+    title: 'Instagram Video Downloader | Download Instagram Videos, Reels & More',
+    description: 'Free Instagram video downloader. Download Instagram videos, reels, and stories in HD quality. Fast, anonymous, and easy to use. Try our Instagram video download tool now!',
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Instagram Downloader - Download Posts, Stories, Reels & More',
-    description: 'Download Instagram posts, stories, reels, highlights, and profile pictures in HD quality.',
+    title: 'Instagram Video Downloader | Download Instagram Videos, Reels & More',
+    description: 'Free Instagram video downloader. Download Instagram videos, reels, and stories in HD quality.',
   },
   robots: {
     index: true,

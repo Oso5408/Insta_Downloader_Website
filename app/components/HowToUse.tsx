@@ -2,48 +2,50 @@
 
 import { motion } from 'framer-motion'
 import { Copy, Download, Link, CheckCircle } from 'lucide-react'
-
-const steps = [
-  {
-    number: '01',
-    title: 'Copy Instagram URL',
-    description: 'Open Instagram and find the content you want to download. Tap the three dots (...) and select "Copy link".',
-    icon: Copy,
-    color: 'from-blue-500 to-cyan-500'
-  },
-  {
-    number: '02',
-    title: 'Paste URL',
-    description: 'Paste the copied Instagram URL into the input field above. You can also use the paste button for convenience.',
-    icon: Link,
-    color: 'from-purple-500 to-pink-500'
-  },
-  {
-    number: '03',
-    title: 'Select Content Type',
-    description: 'Choose the type of content you want to download: Post, Story, Reel, or Profile picture.',
-    icon: CheckCircle,
-    color: 'from-green-500 to-emerald-500'
-  },
-  {
-    number: '04',
-    title: 'Download',
-    description: 'Click the download button and wait for the process to complete. Your file will be saved automatically.',
-    icon: Download,
-    color: 'from-orange-500 to-red-500'
-  }
-]
-
-const tips = [
-  'Only public Instagram content can be downloaded',
-  'No login or account required',
-  'Downloads are completely anonymous',
-  'All content is downloaded in original quality',
-  'Works on mobile, tablet, and desktop',
-  'Free to use with no hidden costs'
-]
+import { useAppTranslation } from './useAppTranslation'
 
 export default function HowToUse() {
+  const { t } = useAppTranslation();
+  const steps = [
+    {
+      number: '01',
+      title: t('step_1_title'),
+      description: t('step_1_desc'),
+      icon: Copy,
+      color: 'from-blue-500 to-cyan-500'
+    },
+    {
+      number: '02',
+      title: t('step_2_title'),
+      description: t('step_2_desc'),
+      icon: Link,
+      color: 'from-purple-500 to-pink-500'
+    },
+    {
+      number: '03',
+      title: t('step_3_title'),
+      description: t('step_3_desc'),
+      icon: CheckCircle,
+      color: 'from-green-500 to-emerald-500'
+    },
+    {
+      number: '04',
+      title: t('step_4_title'),
+      description: t('step_4_desc'),
+      icon: Download,
+      color: 'from-orange-500 to-red-500'
+    }
+  ]
+
+  const tips = [
+    t('tip_public'),
+    t('tip_no_login'),
+    t('tip_anonymous'),
+    t('tip_quality'),
+    t('tip_works_everywhere'),
+    t('tip_free')
+  ]
+
   return (
     <section id="how-to" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,11 +58,10 @@ export default function HowToUse() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            How to Use Our{' '}
-            <span className="gradient-text">Instagram Downloader</span>
+            {t('how_to_use_title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Follow these simple steps to download any Instagram content in just a few clicks
+            {t('how_to_use_desc')}
           </p>
         </motion.div>
 
@@ -99,10 +100,10 @@ export default function HowToUse() {
         >
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              Important Tips
+              {t('important_tips')}
             </h3>
             <p className="text-gray-600">
-              Keep these things in mind for the best experience
+              {t('important_tips_desc')}
             </p>
           </div>
           
@@ -132,16 +133,16 @@ export default function HowToUse() {
           className="mt-16 text-center"
         >
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            Have Questions?
+            Need help? Our support team is here for you.
           </h3>
           <p className="text-gray-600 mb-6">
-            Check out our frequently asked questions for more information
+            If you have any questions or need assistance, please reach out to us directly.
           </p>
           <a
-            href="#faq"
+            href="/contact-us"
             className="btn-secondary inline-flex items-center space-x-2"
           >
-            <span>View FAQ</span>
+            <span>Contact Us</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { ArrowLeft, Mail, MessageCircle, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Mail, MessageCircle, Phone, MapPin, Send, CheckCircle, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
@@ -25,14 +25,27 @@ export default function ContactUs() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setIsSubmitted(false);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setIsSubmitted(true);
+        toast.success("Message sent successfully! We'll get back to you soon.");
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        toast.error(data.error || 'Failed to send message. Please try again later.');
+      }
+    } catch (error) {
+      toast.error('Failed to send message. Please try again later.');
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      toast.success('Message sent successfully! We\'ll get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 2000);
+    }
   };
 
   return (
@@ -85,10 +98,11 @@ export default function ContactUs() {
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">Email Support</h3>
                   <p className="text-gray-600 mb-2">For general inquiries and support</p>
                   <a 
-                    href="mailto:userbuy51@gmail.com" 
-                    className="text-purple-600 hover:text-purple-700 font-medium"
+                    href="mailto:support24@igdownloader24.com"
+                    className="flex items-center space-x-3 text-gray-600 hover:text-purple-600 transition-colors"
                   >
-                    userbuy51@gmail.com
+                    <Mail className="w-5 h-5" />
+                    <span>support24@igdownloader24.com</span>
                   </a>
                 </div>
               </div>
@@ -173,26 +187,30 @@ export default function ContactUs() {
                     </div>
                   </div>
 
-                  <div>
+                  <div className="relative">
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                       Subject *
                     </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                    >
-                      <option value="">Select a subject</option>
-                      <option value="download-issue">Download Issue</option>
-                      <option value="technical-support">Technical Support</option>
-                      <option value="feature-request">Feature Request</option>
-                      <option value="bug-report">Bug Report</option>
-                      <option value="general-inquiry">General Inquiry</option>
-                      <option value="partnership">Partnership</option>
-                    </select>
+                    <div className="relative">
+                      <select
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full appearance-none px-4 py-3 pr-12 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-white text-gray-700"
+                      >
+                        <option value="">Choose a topic…</option>
+                        <option value="general-inquiry">General Inquiry</option>
+                        <option value="download-issue">Download Issue</option>
+                        <option value="technical-support">Technical Support</option>
+                        <option value="feature-request">Feature Request</option>
+                        <option value="bug-report">Report a Bug</option>
+                        <option value="partnership">Partnership / Business</option>
+                        <option value="feedback">Feedback</option>
+                      </select>
+                      <ChevronDown className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+                    </div>
                   </div>
 
                   <div>

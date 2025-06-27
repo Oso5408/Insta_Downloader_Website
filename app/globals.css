@@ -42,4 +42,12 @@
   .backdrop-blur {
     backdrop-filter: blur(10px);
   }
+}
+
+@keyframes slide-down {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+.animate-slide-down {
+  animation: slide-down 0.4s cubic-bezier(0.4,0,0.2,1);
 } 

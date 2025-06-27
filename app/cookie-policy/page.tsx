@@ -20,7 +20,7 @@ export default function CookiePolicy() {
         <h2 className="text-xl font-semibold mt-6">4. Third-Party Cookies</h2>
         <p>We may use third-party services (such as analytics or advertising) that set their own cookies.</p>
         <h2 className="text-xl font-semibold mt-6">5. Contact</h2>
-        <p>For questions about our Cookie Policy, please contact us at <a href="mailto:userbuy51@gmail.com" className="text-blue-600 underline">userbuy51@gmail.com</a> or via the form on our website.</p>
+        <p>For questions about our Cookie Policy, please contact us at <a href="mailto:support24@igdownloader24.com" className="text-blue-600 underline">support24@igdownloader24.com</a> or via the form on our website.</p>
       </div>
     </div>
   );

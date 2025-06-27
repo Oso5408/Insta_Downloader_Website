@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ChevronDown, ChevronUp, HelpCircle, Search } from 'lucide-react';
 import Link from 'next/link';
+import Head from 'next/head';
 
 interface FAQItem {
   question: string;
@@ -146,6 +147,20 @@ const categories = [
   { id: "troubleshooting", name: "Troubleshooting", count: faqData.filter(item => item.category === "troubleshooting").length }
 ];
 
+// Generate FAQPage JSON-LD
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqData.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer.replace(/\n/g, '<br/>')
+    }
+  }))
+};
+
 export default function FAQ() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
@@ -168,6 +183,12 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      </Head>
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
