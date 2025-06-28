@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Instagram Video Downloader | Download Instagram Videos, Reels & More',
   description: 'Free Instagram video downloader. Download Instagram videos, reels, and stories in HD quality. Fast, anonymous, and easy to use. Try our Instagram video download tool now!',
-  keywords: 'instagram video download, instagram video downloader, download instagram video, instagram download video, instagram reel download, free, HD, online',
+  keywords: 'instagram downloader, ig download, insta downloader, instagram dl, insta download com, instagram video download, ins video download, insta video dow, insta videodownload, instavideo downloader, instavideodownload, story saver, instagram story download, download instagram, ig stories, reels, profile pictures, save instagram, igdownloader, free, HD, online, Instagram下载, ig下载, insta下载器, Instagram视频下载, 故事保存, Instagram故事下载, इंस्टाग्राम डाउनलोडर, ig डाउनलोड, इंस्टा डाउनलोडर, इंस्टाग्राम वीडियो डाउनलोड, स्टोरी सेवर, इंस्टाग्राम स्टोरी डाउनलोड, इन्स्टाग्राम डाउनलोडर, ig डाउनलोड, insta डाउनलोडर, इन्स्टाग्राम भिडियो डाउनलोड, स्टोरी सेभर, इन्स्टाग्राम स्टोरी डाउनलोड',
   authors: [{ name: 'Instagram Downloader' }],
   openGraph: {
     title: 'Instagram Video Downloader | Download Instagram Videos, Reels & More',
@@ -39,7 +39,7 @@ export default function RootLayout({
         {/* SEO Meta Tags */}
         <title>Instagram Downloader | Download IG Posts, Stories, Reels in HD</title>
         <meta name="description" content="Download Instagram posts, stories, reels, and profile pictures in HD quality. Free, fast, and anonymous Instagram downloader." />
-        <meta name="keywords" content="instagram downloader, download instagram, ig stories, reels, profile pictures, save instagram, igdownloader" />
+        <meta name="keywords" content="instagram downloader, ig download, insta downloader, instagram dl, insta download com, instagram video download, ins video download, insta video dow, insta videodownload, instavideo downloader, instavideodownload, story saver, instagram story download, download instagram, ig stories, reels, profile pictures, save instagram, igdownloader, free, HD, online, Instagram下载, ig下载, insta下载器, Instagram视频下载, 故事保存, Instagram故事下载, इंस्टाग्राम डाउनलोडर, ig डाउनलोड, इंस्टा डाउनलोडर, इंस्टाग्राम वीडियो डाउनलोड, स्टोरी सेवर, इंस्टाग्राम स्टोरी डाउनलोड, इन्स्टाग्राम डाउनलोडर, ig डाउनलोड, insta डाउनलोडर, इन्स्टाग्राम भिडियो डाउनलोड, स्टोरी सेभर, इन्स्टाग्राम स्टोरी डाउनलोड" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Open Graph Tags */}
         <meta property="og:title" content="Instagram Downloader" />
