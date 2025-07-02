@@ -212,7 +212,7 @@ export default function DownloadForm({ onDownload, isLoading }: DownloadFormProp
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* URL Input */}
             <div>
-              <label htmlFor="url" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="url" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('instagram_url')}
               </label>
               <div className="flex space-x-2">
@@ -246,27 +246,27 @@ export default function DownloadForm({ onDownload, isLoading }: DownloadFormProp
 
             {/* Content Type Selector - Icon Grid */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('content_type')}
               </label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {downloadTypes.map((type) => (
-                  <button
-                    key={type.id}
-                    type="button"
-                    onClick={() => !type.disabled && setSelectedType(type.id)}
+                    <button
+                      key={type.id}
+                      type="button"
+                      onClick={() => !type.disabled && setSelectedType(type.id)}
                     className={`download-type-btn p-4 rounded-lg border-2 ${selectedType === type.id ? 'border-blue-500' : 'border-gray-200 hover:border-gray-300'} ${type.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                     data-type={type.id}
-                    disabled={type.disabled}
-                  >
+                      disabled={type.disabled}
+                    >
                     <div className={`w-8 h-8 bg-gradient-to-r ${type.color} rounded-lg flex items-center justify-center mx-auto mb-2`}>
                       <type.icon size={24} className="text-white" />
-                    </div>
-                    <div className="text-center">
-                      <div className="font-semibold text-gray-900">{type.name}</div>
-                      <div className="text-xs text-gray-500 mt-1">{type.description}</div>
-                    </div>
-                  </button>
+                        </div>
+                        <div className="text-center">
+                      <div className="font-semibold text-gray-900 dark:text-white">{type.name}</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-300 mt-1">{type.description}</div>
+                      </div>
+                    </button>
                 ))}
               </div>
             </div>

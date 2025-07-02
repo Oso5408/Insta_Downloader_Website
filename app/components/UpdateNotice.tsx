@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
 // Change this version string to force the notice to reappear for all users
-const NOTICE_VERSION = "2024-06-27-v2";
+const NOTICE_VERSION = "2024-12-28-dark-mode";
 const LOCALSTORAGE_KEY = `update-notice-dismissed-${NOTICE_VERSION}`;
 
 export default function UpdateNotice() {
@@ -29,10 +29,10 @@ export default function UpdateNotice() {
   return (
     <div className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-3 flex items-center justify-between shadow-lg animate-slide-down">
       <div className="flex items-center space-x-3">
-        <span className="font-semibold">🚀 Update:</span>
+        <span className="font-semibold">🌙 New Feature:</span>
         <span>
-          We've added <b>Nepali (नेपाली)</b> language support! The main download form and all features are now available in Nepali, Hindi, Chinese, and English.<br className="hidden md:inline" />
-          <b>Translations improved</b> for the main download form and content type selector. <b>Download reliability</b> and error handling have also been enhanced.
+          <b>Dark Mode</b> is now available! Toggle between light and dark themes using the button in the top-right corner.<br className="hidden md:inline" />
+          The entire site now supports <b>full dark mode</b> with proper contrast and accessibility. Perfect for late-night downloading!
         </span>
       </div>
       <button

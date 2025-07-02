@@ -90,37 +90,37 @@ export default function MediaPreview({ media, onClose, onDownload, isLoading }: 
           try {
             console.log(`Downloading: ${item.filename} from ${item.url}`)
             
-            const response = await fetch('/api/proxy', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                url: item.url,
-                filename: item.filename,
-              }),
-            })
+          const response = await fetch('/api/proxy', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              url: item.url,
+              filename: item.filename,
+            }),
+          })
 
-            if (!response.ok) {
+          if (!response.ok) {
               const errorData = await response.json().catch(() => ({}))
               throw new Error(errorData.error || `HTTP ${response.status}`)
-            }
+          }
 
-            const blob = await response.blob()
+          const blob = await response.blob()
             
             // Check if blob is valid
             if (blob.size === 0) {
               throw new Error('Downloaded file is empty')
             }
             
-            const url = window.URL.createObjectURL(blob)
-            const a = document.createElement('a')
-            a.href = url
-            a.download = item.filename
-            document.body.appendChild(a)
-            a.click()
-            document.body.removeChild(a)
-            window.URL.revokeObjectURL(url)
+          const url = window.URL.createObjectURL(blob)
+          const a = document.createElement('a')
+          a.href = url
+          a.download = item.filename
+          document.body.appendChild(a)
+          a.click()
+          document.body.removeChild(a)
+          window.URL.revokeObjectURL(url)
             
             successCount++
             
@@ -162,7 +162,7 @@ export default function MediaPreview({ media, onClose, onDownload, isLoading }: 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="bg-white rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden"
+        className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden"
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">

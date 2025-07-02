@@ -47,7 +47,7 @@ export default function HowToUse() {
   ]
 
   return (
-    <section id="how-to" className="py-20 bg-gray-50">
+    <section id="how-to" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -57,10 +57,10 @@ export default function HowToUse() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t('how_to_use_title')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             {t('how_to_use_desc')}
           </p>
         </motion.div>
@@ -80,11 +80,11 @@ export default function HowToUse() {
                 <div className={`w-16 h-16 bg-gradient-to-r ${step.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
                   <step.icon className="w-8 h-8 text-white" />
                 </div>
-                <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-gray-700 dark:to-gray-900 rounded-full flex items-center justify-center text-white font-bold text-sm">
                   {step.number}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{step.title}</h3>
-                <p className="text-gray-600 text-sm">{step.description}</p>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">{step.description}</p>
               </div>
             </motion.div>
           ))}
@@ -96,13 +96,13 @@ export default function HowToUse() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="bg-white rounded-2xl p-8 shadow-lg"
+          className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg"
         >
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
               {t('important_tips')}
             </h3>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               {t('important_tips_desc')}
             </p>
           </div>
@@ -115,10 +115,10 @@ export default function HowToUse() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50"
+                className="inline-flex items-center space-x-3 p-3 rounded-lg bg-white hover:bg-gray-50 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 font-semibold transition-all duration-200"
               >
-                <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
-                <span className="text-gray-700 text-sm">{tip}</span>
+                <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-gray-700 dark:to-gray-900 rounded-full"></div>
+                <span>{tip}</span>
               </motion.div>
             ))}
           </div>
@@ -132,10 +132,10 @@ export default function HowToUse() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             {t('need_help_title')}
           </h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
             {t('need_help_desc')}
           </p>
           <a

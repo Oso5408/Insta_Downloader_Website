@@ -249,12 +249,12 @@ export default function FAQ() {
         <div className="space-y-4">
           {filteredFAQ.length > 0 ? (
             filteredFAQ.map((item, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
                 <button
                   onClick={() => toggleItem(index)}
-                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
-                  <h3 className="text-lg font-semibold text-gray-800 pr-4">{item.question}</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white pr-4">{item.question}</h3>
                   {expandedItems.includes(index) ? (
                     <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" />
                   ) : (
@@ -263,7 +263,7 @@ export default function FAQ() {
                 </button>
                 {expandedItems.includes(index) && (
                   <div className="px-6 pb-4">
-                    <div className="text-gray-600 whitespace-pre-line">{item.answer}</div>
+                    <div className="text-gray-600 dark:text-gray-300 whitespace-pre-line">{item.answer}</div>
                   </div>
                 )}
               </div>
@@ -290,20 +290,20 @@ export default function FAQ() {
 
         {/* Still Need Help */}
         <div className="mt-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg p-8 text-white text-center">
-          <h2 className="text-2xl font-bold mb-4">Still need help?</h2>
-          <p className="text-purple-100 mb-6">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Still need help?</h2>
+          <p className="text-purple-100 dark:text-purple-200 mb-6">
             Can't find the answer you're looking for? Our support team is here to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/contact-us"
-              className="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="bg-white dark:bg-gray-800 text-purple-600 dark:text-purple-300 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
               Contact Support
             </Link>
             <Link 
               href="/help-center"
-              className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors"
+              className="border-2 border-white dark:border-gray-700 text-white dark:text-gray-200 px-6 py-3 rounded-lg font-semibold hover:bg-white dark:hover:bg-gray-700 hover:text-purple-600 dark:hover:text-purple-300 transition-colors"
             >
               Help Center
             </Link>

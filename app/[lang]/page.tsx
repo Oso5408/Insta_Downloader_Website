@@ -24,6 +24,7 @@ import HowToUse from '../components/HowToUse';
 import Footer from '../components/Footer';
 import UpdateNotice from '../components/UpdateNotice';
 import { useAppTranslation } from '../components/useAppTranslation';
+import { ModeToggle } from '../components/ModeToggle';
 
 export default function Home({ params }: { params: { lang: string } }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,9 +40,9 @@ export default function Home({ params }: { params: { lang: string } }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:bg-gray-900 dark:bg-none">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
+      <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-6">
@@ -52,36 +53,39 @@ export default function Home({ params }: { params: { lang: string } }) {
                 <span className="text-xl font-bold gradient-text">InstaDownloader</span>
               </div>
               <nav className="hidden md:flex space-x-6">
-                <a href="#how-to" className="text-gray-600 hover:text-purple-600 transition-colors">{t('how_to_use')}</a>
-                <Link href="/faq" className="text-gray-600 hover:text-purple-600 transition-colors">{t('faq')}</Link>
+                <a href="#how-to" className="text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">{t('how_to_use')}</a>
+                <Link href="/faq" className="text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">{t('faq')}</Link>
               </nav>
             </div>
-            <div className="relative ml-auto">
-              <button
-                onClick={() => setLangOpen(v => !v)}
-                className="flex items-center space-x-2 px-4 py-2 rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-              >
-                <Globe className="w-5 h-5" />
-                <span>{t('language')}</span>
-              </button>
-              {langOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                  <ul className="py-2 text-sm text-gray-700">
-                    <li>
-                      <a href="/en" className="block px-4 py-2 hover:bg-gray-100">English</a>
-                    </li>
-                    <li>
-                      <a href="/zh" className="block px-4 py-2 hover:bg-gray-100">中文 (简体)</a>
-                    </li>
-                    <li>
-                      <a href="/hi" className="block px-4 py-2 hover:bg-gray-100">हिन्दी</a>
-                    </li>
-                    <li>
-                      <a href="/ne" className="block px-4 py-2 hover:bg-gray-100">नेपाली</a>
-                    </li>
-                  </ul>
-                </div>
-              )}
+            <div className="flex items-center gap-3 ml-auto">
+              <div className="relative">
+                <button
+                  onClick={() => setLangOpen(v => !v)}
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                >
+                  <Globe className="w-5 h-5" />
+                  <span>{t('language')}</span>
+                </button>
+                {langOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50">
+                    <ul className="py-2 text-sm text-gray-700">
+                      <li>
+                        <a href="/en" className="block px-4 py-2 hover:bg-gray-100">English</a>
+                      </li>
+                      <li>
+                        <a href="/zh" className="block px-4 py-2 hover:bg-gray-100">中文 (简体)</a>
+                      </li>
+                      <li>
+                        <a href="/hi" className="block px-4 py-2 hover:bg-gray-100">हिन्दी</a>
+                      </li>
+                      <li>
+                        <a href="/ne" className="block px-4 py-2 hover:bg-gray-100">नेपाली</a>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+              <ModeToggle />
             </div>
           </div>
         </div>
@@ -97,10 +101,10 @@ export default function Home({ params }: { params: { lang: string } }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
                 {t('title')}
               </h1>
-              <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
                 {t('subtitle')}
               </p>
             </motion.div>
@@ -122,25 +126,25 @@ export default function Home({ params }: { params: { lang: string } }) {
               className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
             >
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-gray-700 dark:to-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Zap className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('feature_fast_title')}</h3>
-                <p className="text-gray-600">{t('feature_fast_desc')}</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{t('feature_fast_title')}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{t('feature_fast_desc')}</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-gray-700 dark:to-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Shield className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('feature_anon_title')}</h3>
-                <p className="text-gray-600">{t('feature_anon_desc')}</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{t('feature_anon_title')}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{t('feature_anon_desc')}</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-gray-700 dark:to-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Star className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('feature_hd_title')}</h3>
-                <p className="text-gray-600">{t('feature_hd_desc')}</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{t('feature_hd_title')}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{t('feature_hd_desc')}</p>
               </div>
             </motion.div>
           </div>
@@ -157,51 +161,51 @@ export default function Home({ params }: { params: { lang: string } }) {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('why_choose')}</h2>
-            <p className="text-xl text-gray-600">{t('why_choose_desc')}</p>
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{t('why_choose')}</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">{t('why_choose_desc')}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow p-8 text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center">
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Download className="w-6 h-6 text-blue-500" />
               </div>
               <h3 className="text-lg font-bold mb-2">{t('feature_types_title')}</h3>
-              <p className="text-gray-600">{t('feature_types_desc')}</p>
+              <p className="text-gray-600 dark:text-gray-300">{t('feature_types_desc')}</p>
             </div>
-            <div className="bg-white rounded-lg shadow p-8 text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center">
+              <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Shield className="w-6 h-6 text-green-500" />
               </div>
               <h3 className="text-lg font-bold mb-2">{t('feature_anon_title')}</h3>
-              <p className="text-gray-600">{t('feature_anon_desc')}</p>
+              <p className="text-gray-600 dark:text-gray-300">{t('feature_anon_desc')}</p>
             </div>
-            <div className="bg-white rounded-lg shadow p-8 text-center">
-              <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center">
+              <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Zap className="w-6 h-6 text-yellow-500" />
               </div>
               <h3 className="text-lg font-bold mb-2">{t('feature_fast_title')}</h3>
-              <p className="text-gray-600">{t('feature_fast_desc')}</p>
+              <p className="text-gray-600 dark:text-gray-300">{t('feature_fast_desc')}</p>
             </div>
-            <div className="bg-white rounded-lg shadow p-8 text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center">
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Globe className="w-6 h-6 text-purple-500" />
               </div>
               <h3 className="text-lg font-bold mb-2">{t('feature_everywhere_title')}</h3>
-              <p className="text-gray-600">{t('feature_everywhere_desc')}</p>
+              <p className="text-gray-600 dark:text-gray-300">{t('feature_everywhere_desc')}</p>
             </div>
-            <div className="bg-white rounded-lg shadow p-8 text-center">
-              <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center">
+              <div className="w-12 h-12 bg-pink-100 dark:bg-pink-900 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Star className="w-6 h-6 text-pink-500" />
               </div>
               <h3 className="text-lg font-bold mb-2">{t('feature_hd_title')}</h3>
-              <p className="text-gray-600">{t('feature_hd_desc')}</p>
+              <p className="text-gray-600 dark:text-gray-300">{t('feature_hd_desc')}</p>
             </div>
-            <div className="bg-white rounded-lg shadow p-8 text-center">
-              <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center">
+              <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Sparkles className="w-6 h-6 text-indigo-500" />
               </div>
               <h3 className="text-lg font-bold mb-2">{t('feature_mobile_title')}</h3>
-              <p className="text-gray-600">{t('feature_mobile_desc')}</p>
+              <p className="text-gray-600 dark:text-gray-300">{t('feature_mobile_desc')}</p>
             </div>
           </div>
         </div>

@@ -4,17 +4,17 @@ import Link from 'next/link';
 
 export default function HelpCenter() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:bg-gray-900 dark:bg-none">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
+      <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-              <ArrowLeft className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-600">Back to Home</span>
+              <ArrowLeft className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+              <span className="text-gray-600 dark:text-gray-300">Back to Home</span>
             </Link>
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-gray-700 dark:to-gray-900 rounded-lg flex items-center justify-center">
                 <HelpCircle className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold gradient-text">Help Center</span>
@@ -156,46 +156,46 @@ export default function HelpCenter() {
 
           {/* Supported Content Types */}
           <section className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
-            <h2 className="text-2xl font-bold mb-6 text-gray-900">Supported Content Types</h2>
+            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Supported Content Types</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex items-start space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-gray-700 dark:to-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Image className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800">Instagram Posts</h3>
-                  <p className="text-gray-600 text-sm">Single images, carousel posts, and captions</p>
+                  <h3 className="font-semibold text-gray-800 dark:text-white">Instagram Posts</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Single images, carousel posts, and captions</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-gray-700 dark:to-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Video className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800">Instagram Reels</h3>
-                  <p className="text-gray-600 text-sm">Short-form videos with audio</p>
+                  <h3 className="font-semibold text-gray-800 dark:text-white">Instagram Reels</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Short-form videos with audio</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-gray-700 dark:to-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Camera className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800">Instagram Stories</h3>
-                  <p className="text-gray-600 text-sm">24-hour temporary content (public accounts only)</p>
+                  <h3 className="font-semibold text-gray-800 dark:text-white">Instagram Stories</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">24-hour temporary content (public accounts only)</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-gray-700 dark:to-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
                   <User className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800">Profile Pictures</h3>
-                  <p className="text-gray-600 text-sm">High-resolution profile images</p>
+                  <h3 className="font-semibold text-gray-800 dark:text-white">Profile Pictures</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">High-resolution profile images</p>
                 </div>
               </div>
             </div>
